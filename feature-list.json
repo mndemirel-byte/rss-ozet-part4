@@ -1,0 +1,58 @@
+{
+  "project": "rss-ozet",
+  "features": [
+    {
+      "id": "llm-ozet",
+      "aciklama": "summarize stub'ı Claude API (Haiku) ile değişir; key yokken ya da çağrı hata verdiğinde extractive fallback devrededir.",
+      "kabul": [
+        "Testler API'yi mock'lar, ağa çıkmaz; fallback yolunu ayrı bir test kanıtlar",
+        "summarize async'e geçer; server.ts ve mevcut testler buna uyarlanır, tamamı yeşil kalır",
+        "npm test çıktısı transcript'te olduğu gibi gösterilir"
+      ],
+      "durum": "beklemede",
+      "bagimlilik": [],
+      "notes": ""
+    },
+    {
+      "id": "en-yeni-en-ustte",
+      "aciklama": "Ana sayfa ve /api/items öğeleri yeniden eskiye sıralar; öğelere yayın tarihi alanı eklenir.",
+      "kabul": [
+        "Sıralamayı fixture ile kanıtlayan bir test var",
+        "Tarihi olmayan eski kayıtlar listeyi kırmaz; bir test bunu gösterir"
+      ],
+      "durum": "beklemede",
+      "bagimlilik": [],
+      "notes": ""
+    },
+    {
+      "id": "kaynak-yonetimi",
+      "aciklama": "Feed listesi data/sources.json'a taşınır; feeds katmanı listeyi oradan okur.",
+      "kabul": [
+        "TASK.md'de kaynak listesi kalmaz; integration test sources.json üzerinden geçer"
+      ],
+      "durum": "beklemede",
+      "bagimlilik": [],
+      "notes": ""
+    },
+    {
+      "id": "ozet-cache",
+      "aciklama": "Aynı kimlikli (guid/link) öğe ikinci kez özetlenmez; özet data/items.json'da kalıcıdır.",
+      "kabul": [
+        "Aynı fixture iki kez işlendiğinde API mock'u yalnızca bir kez çağrılır; test bunu sayar"
+      ],
+      "durum": "beklemede",
+      "bagimlilik": ["llm-ozet"],
+      "notes": ""
+    },
+    {
+      "id": "hata-sayfasi",
+      "aciklama": "Feed erişilemezse arayüz son başarılı veriyi ve bir uyarı satırını gösterir.",
+      "kabul": [
+        "Erişilemeyen kaynak fixture'ıyla SSR çıktısında uyarı metni doğrulanır"
+      ],
+      "durum": "beklemede",
+      "bagimlilik": ["kaynak-yonetimi"],
+      "notes": ""
+    }
+  ]
+}
